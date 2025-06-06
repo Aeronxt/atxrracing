@@ -12,7 +12,27 @@ import { HeroSection } from "@/components/hero-section"
 import { Icons } from "@/components/icons"
 import CountUp from "react-countup"
 import { useInView } from "react-intersection-observer"
-import { MapPin, Car, Globe, Users, Trophy, Calendar } from "lucide-react"
+import { MapPin, Car, Globe, Users, Trophy, Calendar, Check, Route, Flag, Settings, ArrowRight, Target } from "lucide-react"
+
+interface Track {
+  title: string;
+  location: string;
+  length: string;
+  features: string[];
+  image: string;
+}
+
+// Animation variants
+const containerVariants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2
+    }
+  }
+}
 
 export default function Home() {
   const { ref: statsRef, inView: statsInView } = useInView({ triggerOnce: true, threshold: 0.1 })
@@ -47,28 +67,67 @@ export default function Home() {
     }
   ]
 
-  // Australian Victoria Tracks
-  const victorianTracks = [
+  // Australian Tracks
+  const australianTracks: Track[] = [
     {
-      name: "Winton Raceway",
+      title: "Sydney Motorsport Park",
+      location: "Eastern Creek, NSW",
+      length: "3.93km",
+      features: [
+        "FIA Grade 2 facility",
+        "Night racing with LED lighting",
+        "Multiple circuit layouts",
+        "Professional pit facilities"
+      ],
+      image: "https://rgpoutowdawylaxqncyi.supabase.co/storage/v1/object/public/otherlogos//pf-e9febaff--ARDCnewsletterheader.webp"
+    },
+    {
+      title: "Mount Panorama Circuit",
+      location: "Bathurst, NSW",
+      length: "6.213km",
+      features: [
+        "Iconic mountain course",
+        "23 challenging corners",
+        "174m elevation change",
+        "Home of the Bathurst 1000"
+      ],
+      image: "https://rgpoutowdawylaxqncyi.supabase.co/storage/v1/object/public/otherlogos//DSC01209.webp"
+    },
+    {
+      title: "Winton Raceway",
       location: "Benalla, Victoria",
       length: "3.0km",
-      features: ["Technical layout", "Elevation changes", "Challenging corners"],
-      image: "https://images.pexels.com/photos/12118842/pexels-photo-12118842.jpeg"
+      features: [
+        "Technical layout",
+        "Elevation changes",
+        "Challenging corners",
+        "Perfect for beginners"
+      ],
+      image: "https://rgpoutowdawylaxqncyi.supabase.co/storage/v1/object/public/otherlogos//WMR_aerial06.jfif"
     },
     {
-      name: "Sandown Raceway", 
+      title: "Sandown Raceway", 
       location: "Melbourne, Victoria",
       length: "3.1km",
-      features: ["Historic circuit", "Fast flowing corners", "Great for beginners"],
-      image: "https://images.pexels.com/photos/3621557/pexels-photo-3621557.jpeg"
+      features: [
+        "Historic circuit",
+        "Fast flowing corners",
+        "Great for beginners",
+        "Long straights"
+      ],
+      image: "https://rgpoutowdawylaxqncyi.supabase.co/storage/v1/object/public/otherlogos//Race-19-EV09-24-MH3_5754.jpg"
     },
     {
-      name: "Calder Park Raceway",
+      title: "Calder Park Raceway",
       location: "Melbourne, Victoria", 
       length: "2.3km",
-      features: ["Thunderdome oval", "Road course", "Multiple configurations"],
-      image: "https://images.pexels.com/photos/12801/pexels-photo-12801.jpeg"
+      features: [
+        "Thunderdome oval",
+        "Road course",
+        "Multiple configurations",
+        "Technical sections"
+      ],
+      image: "https://rgpoutowdawylaxqncyi.supabase.co/storage/v1/object/public/otherlogos//600e781aef90c.jpg"
     }
   ]
 
@@ -146,16 +205,42 @@ export default function Home() {
             </p>
           </motion.div>
           
-          <Tabs defaultValue="victoria" className="w-full">
-            <TabsList className="grid w-full grid-cols-4 mb-8">
-              <TabsTrigger value="victoria">Victoria Tracks</TabsTrigger>
-              <TabsTrigger value="global">Global Testing</TabsTrigger>
-              <TabsTrigger value="esports">Esports Team</TabsTrigger>
-              <TabsTrigger value="races">Upcoming Races</TabsTrigger>
+          <Tabs defaultValue="trackdays" className="w-full">
+            <TabsList className="grid w-full grid-cols-3 gap-4 h-auto mb-12 bg-transparent">
+              <TabsTrigger 
+                value="trackdays" 
+                className="py-6 px-8 data-[state=active]:bg-primary data-[state=active]:text-white border border-primary/20 hover:border-primary/50 transition-all duration-300"
+              >
+                <div className="text-center">
+                  <Icons.bmw width={32} height={32} className="mx-auto mb-2" />
+                  <h3 className="text-lg font-semibold mb-1">Track Days</h3>
+                  <p className="text-sm opacity-80">Experience & Rental Program</p>
+                </div>
+              </TabsTrigger>
+              <TabsTrigger 
+                value="race" 
+                className="py-6 px-8 data-[state=active]:bg-primary data-[state=active]:text-white border border-primary/20 hover:border-primary/50 transition-all duration-300"
+              >
+                <div className="text-center">
+                  <Trophy className="h-8 w-8 mx-auto mb-2" />
+                  <h3 className="text-lg font-semibold mb-1">Race Program</h3>
+                  <p className="text-sm opacity-80">Your path to professional racing</p>
+                </div>
+              </TabsTrigger>
+              <TabsTrigger 
+                value="training" 
+                className="py-6 px-8 data-[state=active]:bg-primary data-[state=active]:text-white border border-primary/20 hover:border-primary/50 transition-all duration-300"
+              >
+                <div className="text-center">
+                  <Target className="h-8 w-8 mx-auto mb-2" />
+                  <h3 className="text-lg font-semibold mb-1">Training & Coaching</h3>
+                  <p className="text-sm opacity-80">Professional development</p>
+                </div>
+              </TabsTrigger>
             </TabsList>
             
-            {/* Victoria Track Experiences */}
-            <TabsContent value="victoria" className="space-y-8">
+            {/* Track Day Experiences */}
+            <TabsContent value="trackdays" className="space-y-8">
               <motion.div 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -165,36 +250,66 @@ export default function Home() {
                 <div className="flex items-center gap-4 mb-6">
                   <Icons.bmw width={48} height={48} className="mr-2" />
                   <div>
-                    <h3 className="text-2xl font-bold">BMW E90 Modified Track Experience</h3>
-                    <p className="text-muted-foreground">Road registered automatic transmission for comfortable yet thrilling track driving</p>
+                    <h3 className="text-2xl font-bold">BMW E90 Track Experience & Rental Program</h3>
+                    <p className="text-muted-foreground">Your gateway to motorsport with our high-performance road registered BMW E90</p>
                   </div>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                  <Badge variant="secondary" className="justify-center py-2">
-                    <Icons.bmw width={20} height={20} className="mr-2" />
-                    Auto Transmission
-                  </Badge>
-                  <Badge variant="secondary" className="justify-center py-2">
-                    <Users className="w-4 h-4 mr-2" />
-                    Beginner Friendly
-                  </Badge>
-                  <Badge variant="secondary" className="justify-center py-2">
-                    <MapPin className="w-4 h-4 mr-2" />
-                    Road Registered
-                  </Badge>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                  <div className="space-y-4">
+                    <h4 className="font-semibold">Track Day Experience</h4>
+                    <ul className="space-y-2">
+                      <li className="flex items-center gap-2">
+                        <Check className="h-4 w-4 text-primary" />
+                        <span>Perfect for motorsport beginners</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <Check className="h-4 w-4 text-primary" />
+                        <span>Professional instruction included</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <Check className="h-4 w-4 text-primary" />
+                        <span>All safety equipment provided</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <Check className="h-4 w-4 text-primary" />
+                        <span>Video recording and analysis</span>
+                      </li>
+                    </ul>
+                  </div>
+                  <div className="space-y-4">
+                    <h4 className="font-semibold">Sprint/Time Attack Rental</h4>
+                    <ul className="space-y-2">
+                      <li className="flex items-center gap-2">
+                        <Check className="h-4 w-4 text-primary" />
+                        <span>Full team support available</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <Check className="h-4 w-4 text-primary" />
+                        <span>Professional videography</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <Check className="h-4 w-4 text-primary" />
+                        <span>Data analysis and coaching</span>
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <Check className="h-4 w-4 text-primary" />
+                        <span>Technical support team</span>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
               </motion.div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {victorianTracks.map((track, index) => (
+                {australianTracks.map((track: Track, index: number) => (
                   <motion.div
-                    key={track.name}
+                    key={track.title}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: index * 0.1 }}
                   >
                     <TrackCard
-                      title={track.name}
+                      title={track.title}
                       location={track.location}
                       length={track.length}
                       features={track.features}
@@ -206,158 +321,101 @@ export default function Home() {
               
               <div className="text-center">
                 <p className="text-muted-foreground mb-4">
-                  Experience our modified BMW E90 on Victoria&apos;s premier racing circuits. Perfect for drivers seeking thrills while maintaining comfort and safety.
+                  Experience Australia&apos;s finest racing circuits with our BMW E90 program - the perfect way to enter motorsport 
+                  without the hassle of owning and maintaining a track car. From beginner track days to competitive Sprint events, 
+                  we provide everything you need to start your racing journey.
                 </p>
                 <Button size="lg" asChild>
-                  <Link href="/experiences">Book Your Victoria Track Day</Link>
+                  <Link href="/experiences">Book Your Track Experience</Link>
                 </Button>
               </div>
             </TabsContent>
 
-            {/* Global Testing Experiences */}
-            <TabsContent value="global" className="space-y-8">
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                className="bg-card rounded-lg p-6 border"
+            {/* Race Program Content */}
+            <TabsContent value="race" className="space-y-8">
+              <motion.div
+                variants={containerVariants}
+                initial="hidden"
+                animate="show"
+                className="space-y-8"
               >
-                <div className="flex items-center gap-4 mb-6">
-                  <Globe className="h-12 w-12 text-primary" />
-                  <div>
-                    <h3 className="text-2xl font-bold">Global Track Testing & Experiences</h3>
-                    <p className="text-muted-foreground">Partner with international teams for exclusive testing opportunities worldwide</p>
-                  </div>
-                </div>
-                <div className="text-center">
-                  <Badge variant="outline" className="mb-4">
-                    <Globe className="w-4 h-4 mr-2" />
-                    Contact us to schedule your global testing experience
-                  </Badge>
-                </div>
-              </motion.div>
+                <Card className="overflow-hidden border-2 hover:border-primary/50 transition-all duration-500">
+                  <div className="grid md:grid-cols-2 gap-6 p-6">
+                    <div className="space-y-6">
+                      <div>
+                        <h3 className="text-2xl font-bold mb-2">Your Journey to Professional Racing</h3>
+                        <p className="text-muted-foreground">
+                          From F4 to GT3, discover your path in professional motorsport with ATXR Racing&apos;s comprehensive race program.
+                        </p>
+                      </div>
+                      
+                      <div className="space-y-4">
+                        <div className="flex items-start gap-3">
+                          <div className="p-2 bg-primary/10 rounded-lg">
+                            <Flag className="h-5 w-5 text-primary" />
+                          </div>
+                          <div>
+                            <h4 className="font-semibold">Global Racing Opportunities</h4>
+                            <p className="text-sm text-muted-foreground">F4, F3, GT3, and Endurance racing pathways available</p>
+                          </div>
+                        </div>
+                        
+                        <div className="flex items-start gap-3">
+                          <div className="p-2 bg-primary/10 rounded-lg">
+                            <Trophy className="h-5 w-5 text-primary" />
+                          </div>
+                          <div>
+                            <h4 className="font-semibold">ATXR Academy Journey</h4>
+                            <p className="text-sm text-muted-foreground">Structured progression from testing to professional racing</p>
+                          </div>
+                        </div>
+                        
+                        <div className="flex items-start gap-3">
+                          <div className="p-2 bg-primary/10 rounded-lg">
+                            <Settings className="h-5 w-5 text-primary" />
+                          </div>
+                          <div>
+                            <h4 className="font-semibold">Professional Support</h4>
+                            <p className="text-sm text-muted-foreground">Full team backing, data analysis, and career guidance</p>
+                          </div>
+                        </div>
+                      </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {globalExperiences.map((experience, index) => (
-                  <motion.div
-                    key={experience.title}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                  >
-                    <GlobalExperienceCard
-                      title={experience.title}
-                      location={experience.location}
-                      description={experience.description}
-                      features={experience.features}
-                      image={experience.image}
-                    />
-                  </motion.div>
-                ))}
-              </div>
-              
-              <div className="text-center bg-accent/10 rounded-lg p-8">
-                <h4 className="text-xl font-bold mb-4">Ready for Global Testing?</h4>
-                <p className="text-muted-foreground mb-6">
-                  Connect with our partner teams around the globe for exclusive access to world-class racing experiences.
-                </p>
-                <Button size="lg" asChild>
-                  <Link href="/contact">Contact Us for Global Testing</Link>
-                </Button>
-              </div>
+                      <Button asChild size="lg" className="w-full md:w-auto">
+                        <Link href="/race">
+                          Explore Race Program
+                          <ArrowRight className="ml-2 h-5 w-5" />
+                        </Link>
+                      </Button>
+                    </div>
+
+                    <div className="relative h-[400px] rounded-xl overflow-hidden">
+                      <Image
+                        src="https://images.pexels.com/photos/12118842/pexels-photo-12118842.jpeg"
+                        alt="ATXR Racing Program"
+                        fill
+                        className="object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                      <div className="absolute bottom-4 left-4 right-4">
+                        <div className="grid grid-cols-2 gap-2">
+                          <Badge variant="secondary" className="bg-black/70 text-white">
+                            F4 to GT3 Pathways
+                          </Badge>
+                          <Badge variant="secondary" className="bg-black/70 text-white">
+                            Professional Racing
+                          </Badge>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </Card>
+              </motion.div>
             </TabsContent>
 
-            {/* Enhanced Esports Section */}
-            <TabsContent value="esports" className="space-y-8">
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                className="bg-card rounded-lg p-6 border"
-              >
-                <div className="flex items-center gap-4 mb-6">
-                  <Trophy className="h-12 w-12 text-primary" />
-                  <div>
-                    <h3 className="text-2xl font-bold">ATXR Racing Esports Team</h3>
-                    <p className="text-muted-foreground">Professional sim racing drivers competing in global championships</p>
-                  </div>
-                </div>
-              </motion.div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                {esportsDrivers.map((driver, index) => (
-                  <motion.div
-                    key={driver.name}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                  >
-                    <EsportsDriverCard
-                      name={driver.name}
-                      role={driver.role}
-                      speciality={driver.speciality}
-                      achievements={driver.achievements}
-                      currentRace={driver.currentRace}
-                      image={driver.image}
-                    />
-                  </motion.div>
-                ))}
-              </div>
-
-              <div className="bg-accent/10 rounded-lg p-8">
-                <h4 className="text-xl font-bold mb-4 text-center">Currently Competing In</h4>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <div className="text-center p-4 bg-card rounded-lg">
-                    <Calendar className="h-8 w-8 mx-auto mb-2 text-primary" />
-                    <h5 className="font-semibold">F1 Esports Championship 2025</h5>
-                    <p className="text-sm text-muted-foreground">Season ongoing</p>
-                  </div>
-                  <div className="text-center p-4 bg-card rounded-lg">
-                    <Calendar className="h-8 w-8 mx-auto mb-2 text-primary" />
-                    <h5 className="font-semibold">IMSA Michelin Pilot Challenge</h5>
-                    <p className="text-sm text-muted-foreground">Round 3 upcoming</p>
-                  </div>
-                  <div className="text-center p-4 bg-card rounded-lg">
-                    <Calendar className="h-8 w-8 mx-auto mb-2 text-primary" />
-                    <h5 className="font-semibold">Le Mans Virtual Series 2025</h5>
-                    <p className="text-sm text-muted-foreground">Championship leader</p>
-                  </div>
-                </div>
-                <div className="text-center mt-6">
-                  <Button asChild>
-                    <Link href="/esports">Join Our Esports Team</Link>
-                  </Button>
-                </div>
-              </div>
-            </TabsContent>
-
-            {/* Upcoming Races */}
-            <TabsContent value="races" className="space-y-4">
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <RaceCard
-                  title="Circuit of the Americas"
-                  date="May 15-17, 2025"
-                  location="Austin, TX"
-                  image="https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg"
-                />
-                <RaceCard
-                  title="Monaco Grand Prix"
-                  date="June 5-7, 2025"
-                  location="Monte Carlo, Monaco"
-                  image="https://images.pexels.com/photos/417344/pexels-photo-417344.jpeg"
-                />
-                <RaceCard
-                  title="Nürburgring 24 Hours"
-                  date="June 20-21, 2025"
-                  location="Nürburg, Germany"
-                  image="https://images.pexels.com/photos/3972755/pexels-photo-3972755.jpeg"
-                />
-              </div>
-              <div className="flex justify-center mt-8">
-                <Button asChild>
-                  <Link href="/races">Full Race Calendar</Link>
-                </Button>
-              </div>
+            {/* Training Content */}
+            <TabsContent value="training" className="space-y-8">
+              {/* ... existing training content ... */}
             </TabsContent>
           </Tabs>
         </div>
@@ -366,15 +424,8 @@ export default function Home() {
   )
 }
 
-interface TrackCardProps {
-  title: string
-  location: string
-  length: string
-  features: string[]
-  image: string
-}
-
-function TrackCard({ title, location, length, features, image }: TrackCardProps) {
+// Track Card Component
+function TrackCard({ title, location, length, features, image }: Track) {
   return (
     <Card className="overflow-hidden group hover:shadow-lg transition-all duration-300">
       <div className="relative h-48">
@@ -399,7 +450,7 @@ function TrackCard({ title, location, length, features, image }: TrackCardProps)
         <div className="space-y-2">
           {features.map((feature, index) => (
             <div key={index} className="flex items-center gap-2 text-sm">
-              <Icons.check className="h-4 w-4 text-primary" />
+              <Check className="h-4 w-4 text-primary" />
               <span>{feature}</span>
             </div>
           ))}

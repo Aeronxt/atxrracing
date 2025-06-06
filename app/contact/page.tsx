@@ -119,15 +119,27 @@ export default function ContactPage() {
   const faqs = [
     {
       id: "booking",
-      question: "How do I book a BMW E90 track experience?",
-      answer: "Booking is easy! Visit our Experiences page, select your preferred Victorian track (Winton, Sandown, or Calder Park), choose your date, and complete the online booking form. You'll receive confirmation within 24 hours.",
+      question: "How do I book a track experience?",
+      answer: "Booking is easy! Visit our Experiences page, select your preferred track (Victoria, NSW, or international), choose your date, and complete the online booking form. You'll receive confirmation within 24 hours.",
       category: "Booking"
     },
     {
       id: "requirements",
       question: "What are the requirements for track experiences?",
-      answer: "You must be 18+ with a valid driver's license. Our BMW E90 features automatic transmission, making it perfect for beginners. We provide all safety equipment including helmets, racing suits, and professional instruction.",
+      answer: "You must be 18+ with a valid driver's license. Experience requirements vary by track - NSW tracks like Mount Panorama require prior track experience, while our BMW E90 experiences are perfect for beginners. We provide all safety equipment including helmets, racing suits, and professional instruction.",
       category: "Requirements"
+    },
+    {
+      id: "nsw-tracks",
+      question: "What makes the NSW track experiences special?",
+      answer: "Our NSW experiences feature two iconic circuits: Sydney Motorsport Park with its multiple configurations and night racing capability, and Mount Panorama Bathurst, Australia's most legendary racing circuit. Both offer unique challenges and professional instruction.",
+      category: "Tracks"
+    },
+    {
+      id: "night-racing",
+      question: "Can I experience night racing at Sydney Motorsport Park?",
+      answer: "Yes! Sydney Motorsport Park features state-of-the-art LED lighting for night racing. Our experiences include both day and night sessions, allowing you to master the circuit in different conditions.",
+      category: "Tracks"
     },
     {
       id: "global-testing",
@@ -179,7 +191,7 @@ export default function ContactPage() {
     }
   ]
 
-  const faqCategories = ["All", "Booking", "Requirements", "Global Programs", "Pricing", "Esports", "Corporate"]
+  const faqCategories = ["All", "Booking", "Requirements", "Tracks", "Global Programs", "Pricing", "Esports", "Corporate"]
   const [selectedCategory, setSelectedCategory] = useState("All")
 
   const filteredFaqs = selectedCategory === "All" 

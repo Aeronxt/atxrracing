@@ -39,14 +39,14 @@ export function SiteHeader() {
   const navigationItems = [
     { href: "/", label: "Home" },
     { href: "/experiences", label: "Experiences" },
+    { href: "/race", label: "Race" },
     { href: "/about", label: "About Us" },
     { href: "/esports", label: "Esports" },
-    { href: "/partners", label: "Partners" },
-    { href: "/races", label: "Races" },
+    { href: "/sponsors", label: "Sponsors" },
+    { href: "/calendar", label: "Calendar" },
     { href: "/videos", label: "Videos" },
     { href: "/news", label: "News" },
     { href: "/jobs", label: "Jobs" },
-    { href: "/trackdays", label: "Trackdays" },
     { href: "/shop", label: "Shop" },
     { href: "/contact", label: "Contact" }
   ]

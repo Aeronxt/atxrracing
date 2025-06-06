@@ -15,6 +15,25 @@ import {
   Timer, Flag, Shield, Camera, BookOpen, HeadphonesIcon
 } from "lucide-react"
 
+interface Experience {
+  id: string;
+  title: string;
+  shortDesc: string;
+  description: string;
+  price: string;
+  originalPrice?: string;
+  duration: string;
+  location: string;
+  trackLength: string;
+  difficulty: string;
+  maxSpeed: string;
+  featured: boolean;
+  includes: string[];
+  highlights: string[];
+  image: string;
+  trackFeatures: string[];
+}
+
 export default function ExperiencesPage() {
   const [selectedCategory, setSelectedCategory] = useState("victoria")
   const [selectedExperience, setSelectedExperience] = useState<string | null>(null)
@@ -52,7 +71,7 @@ export default function ExperiencesPage() {
         "Elevation changes for skill development",
         "Professional racing instruction"
       ],
-      image: "https://images.pexels.com/photos/12118842/pexels-photo-12118842.jpeg",
+      image: "https://rgpoutowdawylaxqncyi.supabase.co/storage/v1/object/public/otherlogos//WMR_aerial06.jfif",
       trackFeatures: ["12 challenging corners", "100m elevation change", "2.8km main straight"]
     },
     {
@@ -86,7 +105,7 @@ export default function ExperiencesPage() {
         "Excellent for first-time track drivers",
         "BMW E90 automatic for easy handling"
       ],
-      image: "https://images.pexels.com/photos/3621557/pexels-photo-3621557.jpeg",
+      image: "https://rgpoutowdawylaxqncyi.supabase.co/storage/v1/object/public/otherlogos//Race-19-EV09-24-MH3_5754.jpg",
       trackFeatures: ["Historic Turn 1 hairpin", "Fast Dandenong straight", "Technical back section"]
     },
     {
@@ -120,145 +139,390 @@ export default function ExperiencesPage() {
         "BMW E90 comfort meets performance",
         "Perfect for skill progression"
       ],
-      image: "https://images.pexels.com/photos/12801/pexels-photo-12801.jpeg",
+      image: "https://rgpoutowdawylaxqncyi.supabase.co/storage/v1/object/public/otherlogos//600e781aef90c.jpg",
       trackFeatures: ["Thunderdome banking", "Technical infield", "Multiple layouts"]
     }
   ]
 
-  // Global Testing Experiences  
-  const globalExperiences = [
+  // NSW Track Experiences
+  const nswExperiences = [
     {
-      id: "radical-global",
-      title: "Radical SR3/SR8 Global Testing",
-      shortDesc: "Pure racing DNA across international circuits",
-      description: "Experience the raw power and precision of Radical sports cars on world-renowned circuits. Our global partner network provides access to exclusive testing opportunities with professional-grade Radical SR3 and SR8 vehicles.",
-      price: "From $2,999",
-      duration: "2-3 Days",
-      location: "International Circuits Worldwide",
+      id: "sydney-motorsport",
+      title: "Sydney Motorsport Park Experience",
+      shortDesc: "Multiple circuit configurations and night racing thrills",
+      description: "Experience the versatility of Sydney Motorsport Park with its multiple circuit configurations. From the full Gardner GP Circuit to the technical Druitt North Circuit, master different driving challenges day or night with our professional instruction.",
+      price: "$999",
+      originalPrice: "$1,299",
+      duration: "Full Day (9 hours)",
+      location: "Sydney Motorsport Park, Eastern Creek, NSW",
+      trackLength: "3.93km (Gardner GP)",
+      difficulty: "Intermediate",
+      maxSpeed: "230km/h",
+      featured: true,
+      includes: [
+        "Access to multiple circuit configurations",
+        "Night racing session with LED lighting",
+        "Professional CAMS-licensed instructor",
+        "35+ track laps across configurations",
+        "Circuit walk and briefing",
+        "In-car video recording",
+        "Data analysis and feedback",
+        "Racing helmet and suit provided",
+        "Track day certificate",
+        "Gourmet lunch and refreshments"
+      ],
+      highlights: [
+        "FIA Grade 2 licensed facility",
+        "Night racing capability",
+        "Multiple circuit layouts",
+        "Professional pit facilities",
+        "Advanced driving techniques"
+      ],
+      image: "https://rgpoutowdawylaxqncyi.supabase.co/storage/v1/object/public/otherlogos//pf-e9febaff--ARDCnewsletterheader.webp",
+      trackFeatures: [
+        "Gardner GP (3.93km)",
+        "Brabham Extended (4.5km)",
+        "LED track lighting",
+        "Multiple pit facilities"
+      ]
+    },
+    {
+      id: "bathurst-experience",
+      title: "Mount Panorama Bathurst Experience",
+      shortDesc: "Conquer the legendary mountain circuit",
+      description: "Take on the challenge of Australia's most iconic racing circuit. Experience the thrill of Mount Panorama's elevation changes, challenging corners, and rich racing history with expert guidance and comprehensive support.",
+      price: "$1,499",
+      originalPrice: "$1,899",
+      duration: "Full Day (8 hours)",
+      location: "Mount Panorama Circuit, Bathurst, NSW",
+      trackLength: "6.213km",
       difficulty: "Advanced",
-      maxSpeed: "280km/h",
+      maxSpeed: "250km/h",
       featured: true,
       includes: [
-        "Radical SR3/SR8 track-prepared vehicle",
-        "International circuit access",
-        "Professional race engineer support",
-        "Comprehensive data logging",
-        "Video analysis and coaching",
-        "Performance optimization",
-        "International racing license consultation",
-        "Accommodation packages available",
-        "Global partner team support"
+        "Exclusive track access",
+        "Expert racing instructor",
+        "20+ track laps",
+        "Detailed circuit analysis",
+        "Professional video recording",
+        "Data telemetry analysis",
+        "Safety equipment provided",
+        "Achievement certificate",
+        "Premium catering package",
+        "Mountain viewpoint tour"
       ],
       highlights: [
-        "Purpose-built racing machines",
-        "Global circuit partnerships",
-        "Professional engineering support",
-        "Advanced telemetry systems",
-        "International racing community"
+        "Iconic mountain course",
+        "23 challenging corners",
+        "174m elevation change",
+        "Historic racing venue",
+        "Professional instruction"
       ],
-      image: "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg",
-      regions: ["Europe", "Asia-Pacific", "Americas"]
-    },
-    {
-      id: "f1-testing",
-      title: "Formula 1 Testing Experience",
-      shortDesc: "The pinnacle of motorsport technology",
-      description: "Step into the world of Formula 1 with our exclusive testing programs. Experience cutting-edge F1 technology through advanced simulators and rare on-track opportunities with our partner teams.",
-      price: "From $9,999",
-      duration: "3-5 Days",
-      location: "International F1 Circuits",
-      difficulty: "Expert",
-      maxSpeed: "350km/h",
-      featured: true,
-      includes: [
-        "F1-spec simulator sessions",
-        "Professional F1 circuit access",
-        "Former F1 driver coaching",
-        "Advanced telemetry analysis",
-        "Exclusive paddock access",
-        "Technical briefings",
-        "Professional video production",
-        "VIP hospitality package",
-        "International logistics support"
-      ],
-      highlights: [
-        "Authentic F1 simulator technology",
-        "Former F1 driver instruction",
-        "Exclusive circuit access",
-        "Professional team integration",
-        "Ultimate racing experience"
-      ],
-      image: "https://images.pexels.com/photos/417344/pexels-photo-417344.jpeg",
-      regions: ["Europe", "Middle East", "Asia"]
-    },
-    {
-      id: "supercar-global",
-      title: "Supercar Global Testing",
-      shortDesc: "World-class supercars on legendary circuits",
-      description: "Test the limits of modern supercars on the world's most challenging circuits. From McLaren to Ferrari, experience the pinnacle of automotive engineering with professional support.",
-      price: "From $1,999",
-      duration: "1-2 Days",
-      location: "Premium Global Circuits",
-      difficulty: "Intermediate-Advanced",
-      maxSpeed: "320km/h",
-      featured: false,
-      includes: [
-        "Premium supercar selection",
-        "World-class circuit access",
-        "Professional driving coaches",
-        "Performance data analysis",
-        "High-definition video capture",
-        "Technical workshops",
-        "Racing equipment provided",
-        "Luxury hospitality",
-        "Certificate of completion"
-      ],
-      highlights: [
-        "Latest supercar technology",
-        "Legendary racing circuits",
-        "Professional instruction",
-        "Premium hospitality",
-        "Global venue access"
-      ],
-      image: "https://images.pexels.com/photos/3972755/pexels-photo-3972755.jpeg",
-      regions: ["Worldwide"]
+      image: "https://rgpoutowdawylaxqncyi.supabase.co/storage/v1/object/public/otherlogos//DSC01209.webp",
+      trackFeatures: [
+        "6.213km circuit length",
+        "23 unique corners",
+        "174m elevation change",
+        "Mountain straight"
+      ]
     }
   ]
 
-  // Track Day & Performance Experiences
-  const trackDayExperiences = [
+  // Global Testing Experiences
+  const globalExperiences: Experience[] = [
     {
-      id: "beginner-track",
-      title: "Beginner Track Day",
-      shortDesc: "Your first steps into track driving",
-      description: "Perfect introduction to track driving with comprehensive instruction and safety focus. Learn the fundamentals of high-performance driving in a controlled, supportive environment.",
-      price: "$499",
-      duration: "Full Day",
-      difficulty: "Beginner",
-      includes: ["Classroom instruction", "In-car coaching", "Safety briefing", "Progressive skill building"],
-      image: "https://images.pexels.com/photos/12118842/pexels-photo-12118842.jpeg"
+      id: "global-testing",
+      title: "Global Testing Program",
+      shortDesc: "Test and develop at international circuits",
+      description: "Join our global testing program to experience and develop your skills at world-renowned racing circuits. Perfect for serious racers and teams looking to expand their testing capabilities.",
+      price: "$4,999",
+      originalPrice: "$5,999",
+      duration: "5 Days",
+      location: "Multiple International Circuits",
+      trackLength: "Various",
+      difficulty: "Professional",
+      maxSpeed: "300km/h",
+      featured: true,
+      includes: [
+        "Access to multiple international circuits",
+        "Professional race engineer",
+        "Data analysis package",
+        "Accommodation and transport",
+        "Technical support team",
+        "Safety equipment provided",
+        "Video analysis sessions",
+        "Performance reports"
+      ],
+      highlights: [
+        "World-class facilities",
+        "Professional support team",
+        "Multiple circuit access",
+        "Comprehensive data analysis",
+        "International racing exposure"
+      ],
+      image: "https://images.pexels.com/photos/12118842/pexels-photo-12118842.jpeg",
+      trackFeatures: [
+        "FIA Grade 1 circuits",
+        "Professional pit facilities",
+        "Advanced telemetry systems",
+        "International testing environment"
+      ]
+    }
+  ]
+
+  // Track Day Experiences
+  const trackDayExperiences: Experience[] = [
+    {
+      id: "bmw-e90-track",
+      title: "BMW E90 Track Experience & Rental Program",
+      shortDesc: "Your gateway to motorsport with our high-performance road registered BMW E90",
+      description: "Start your motorsport journey with our modified BMW E90. Perfect for beginners and intermediate drivers, our road registered automatic transmission vehicle offers the ideal balance of performance and accessibility. Whether you're looking for your first track experience or aiming to compete in Sprint/Time Attack events, our comprehensive program provides everything you need, including full team support, professional videography, and data analysis.",
+      price: "$799",
+      originalPrice: "$999",
+      duration: "Full Day (8 hours)",
+      location: "Multiple Australian Circuits",
+      trackLength: "Various",
+      difficulty: "Beginner to Intermediate",
+      maxSpeed: "200km/h",
+      featured: true,
+      includes: [
+        "Professional CAMS-licensed instructor",
+        "30+ track laps",
+        "Track walk and theory session",
+        "In-car video recording",
+        "Data analysis and feedback",
+        "Racing helmet and suit provided",
+        "Track day certificate",
+        "Complimentary lunch and refreshments",
+        "Sprint/Time Attack entry support",
+        "Full technical team backup"
+      ],
+      highlights: [
+        "Road registered BMW E90 for comfort",
+        "Automatic transmission for easy learning",
+        "Available for Sprint/Time Attack events",
+        "Full team support package",
+        "Professional videography and analysis",
+        "Data logging and coaching",
+        "Multiple circuit availability"
+      ],
+      image: "https://images.pexels.com/photos/12118842/pexels-photo-12118842.jpeg",
+      trackFeatures: [
+        "Multiple circuit availability",
+        "Professional pit facilities",
+        "Technical support team",
+        "Data analysis equipment",
+        "Video analysis suite"
+      ]
     },
     {
-      id: "advanced-coaching",
-      title: "Advanced Driver Coaching",
-      shortDesc: "Master advanced racing techniques",
-      description: "One-on-one coaching with professional drivers to master advanced techniques like heel-toe shifting, trail braking, and racecraft.",
-      price: "$1,299",
-      duration: "Full Day",
+      id: "sydney-motorsport",
+      title: "Sydney Motorsport Park Experience",
+      shortDesc: "Multiple circuit configurations and night racing thrills",
+      description: "Experience the versatility of Sydney Motorsport Park with its multiple circuit configurations. From the full Gardner GP Circuit to the technical Druitt North Circuit, master different driving challenges day or night with our professional instruction. This FIA Grade 2 licensed facility offers state-of-the-art amenities including LED lighting for night racing, multiple pit facilities, and comprehensive data analysis capabilities.",
+      price: "$999",
+      originalPrice: "$1,299",
+      duration: "Full Day (9 hours)",
+      location: "Sydney Motorsport Park, Eastern Creek, NSW",
+      trackLength: "3.93km (Gardner GP)",
+      difficulty: "Intermediate",
+      maxSpeed: "230km/h",
+      featured: true,
+      includes: [
+        "Access to multiple circuit configurations",
+        "Night racing session with LED lighting",
+        "Professional CAMS-licensed instructor",
+        "35+ track laps across configurations",
+        "Circuit walk and briefing",
+        "In-car video recording",
+        "Data analysis and feedback",
+        "Racing helmet and suit provided",
+        "Track day certificate",
+        "Gourmet lunch and refreshments"
+      ],
+      highlights: [
+        "FIA Grade 2 licensed facility",
+        "Night racing capability",
+        "Multiple circuit layouts",
+        "Professional pit facilities",
+        "Advanced driving techniques",
+        "State-of-the-art lighting system",
+        "9000m² skidpan available"
+      ],
+      image: "https://images.pexels.com/photos/12118842/pexels-photo-12118842.jpeg",
+      trackFeatures: [
+        "Gardner GP (3.93km)",
+        "Brabham Extended (4.5km)",
+        "Druitt North (2.8km)",
+        "Amaroo South (1.8km)",
+        "LED track lighting",
+        "Multiple pit facilities"
+      ]
+    },
+    {
+      id: "bathurst-experience",
+      title: "Mount Panorama Bathurst Experience",
+      shortDesc: "Conquer the legendary mountain circuit",
+      description: "Take on the challenge of Australia's most iconic racing circuit. Experience the thrill of Mount Panorama's elevation changes, challenging corners, and rich racing history with expert guidance and comprehensive support. This legendary 6.213km circuit features 23 corners and an incredible 174-meter elevation change, making it one of the most challenging and rewarding tracks in the world.",
+      price: "$1,499",
+      originalPrice: "$1,899",
+      duration: "Full Day (8 hours)",
+      location: "Mount Panorama Circuit, Bathurst, NSW",
+      trackLength: "6.213km",
       difficulty: "Advanced",
-      includes: ["1-on-1 coaching", "Video analysis", "Data logging", "Technique refinement"],
-      image: "https://images.pexels.com/photos/3621557/pexels-photo-3621557.jpeg"
+      maxSpeed: "250km/h",
+      featured: true,
+      includes: [
+        "Exclusive track access",
+        "Expert racing instructor",
+        "20+ track laps",
+        "Detailed circuit analysis",
+        "Professional video recording",
+        "Data telemetry analysis",
+        "Safety equipment provided",
+        "Achievement certificate",
+        "Premium catering package",
+        "Mountain viewpoint tour"
+      ],
+      highlights: [
+        "Iconic mountain course",
+        "23 challenging corners",
+        "174m elevation change",
+        "Historic racing venue",
+        "Professional instruction",
+        "Home of the Bathurst 1000",
+        "Legendary racing history"
+      ],
+      image: "https://images.pexels.com/photos/3621557/pexels-photo-3621557.jpeg",
+      trackFeatures: [
+        "6.213km circuit length",
+        "23 unique corners",
+        "174m elevation change",
+        "Mountain straight",
+        "The Dipper",
+        "Conrod Straight",
+        "Skyline section"
+      ]
     },
     {
-      id: "race-prep",
-      title: "Racing License Preparation",
-      shortDesc: "Official racing license certification",
-      description: "Complete preparation for your CAMS racing license with comprehensive training and assessment.",
-      price: "$2,499",
-      duration: "3 Days",
-      difficulty: "Expert",
-      includes: ["CAMS certification", "Race procedure training", "Safety protocols", "Official assessment"],
-      image: "https://images.pexels.com/photos/12801/pexels-photo-12801.jpeg"
+      id: "winton-experience",
+      title: "Winton Raceway Experience",
+      shortDesc: "Master the technical challenges of Victoria's driver's circuit",
+      description: "Develop your skills at Winton Raceway, known as Victoria's driver's circuit. This technical track features a combination of challenging corners and elevation changes that reward precision and skill. Perfect for both beginners and experienced drivers looking to master the art of technical driving.",
+      price: "$699",
+      originalPrice: "$899",
+      duration: "Full Day (8 hours)",
+      location: "Winton Raceway, Benalla, Victoria",
+      trackLength: "3.0km",
+      difficulty: "Beginner to Intermediate",
+      maxSpeed: "180km/h",
+      featured: false,
+      includes: [
+        "Professional instruction",
+        "25+ track laps",
+        "Technical driving workshop",
+        "Video analysis",
+        "Data logging and review",
+        "Safety equipment provided",
+        "Track day certificate",
+        "Lunch and refreshments"
+      ],
+      highlights: [
+        "Technical layout",
+        "Elevation changes",
+        "Challenging corners",
+        "Perfect for learning",
+        "Professional coaching",
+        "Modern facilities"
+      ],
+      image: "https://images.pexels.com/photos/12118842/pexels-photo-12118842.jpeg",
+      trackFeatures: [
+        "3.0km circuit length",
+        "12 technical corners",
+        "Multiple elevation changes",
+        "Wide runoff areas",
+        "Modern pit facilities"
+      ]
+    },
+    {
+      id: "sandown-experience",
+      title: "Sandown Raceway Experience",
+      shortDesc: "High-speed thrills at Melbourne's historic circuit",
+      description: "Experience the perfect blend of speed and history at Sandown Raceway. This historic Melbourne circuit features long straights and flowing corners, making it ideal for high-speed driving while remaining accessible to drivers of all skill levels. Learn the techniques of high-speed cornering and racing lines on this legendary track.",
+      price: "$799",
+      originalPrice: "$999",
+      duration: "Full Day (8 hours)",
+      location: "Sandown Raceway, Melbourne, Victoria",
+      trackLength: "3.1km",
+      difficulty: "Beginner to Advanced",
+      maxSpeed: "220km/h",
+      featured: false,
+      includes: [
+        "Expert instruction",
+        "30+ track laps",
+        "High-speed driving techniques",
+        "Video recording",
+        "Data analysis",
+        "Safety gear provided",
+        "Achievement certificate",
+        "Catered lunch"
+      ],
+      highlights: [
+        "Historic circuit",
+        "Fast flowing corners",
+        "Long straights",
+        "Great for beginners",
+        "High-speed sections",
+        "Professional coaching"
+      ],
+      image: "https://images.pexels.com/photos/3621557/pexels-photo-3621557.jpeg",
+      trackFeatures: [
+        "3.1km circuit length",
+        "13 corners",
+        "Two long straights",
+        "Famous Dandenong Road corner",
+        "Modern safety features"
+      ]
+    },
+    {
+      id: "calder-experience",
+      title: "Calder Park Experience",
+      shortDesc: "Unique multi-configuration motorsport complex",
+      description: "Discover the diverse challenges of Calder Park Raceway, Melbourne's unique motorsport complex. Experience both the technical road course and the famous Thunderdome, offering a truly unique driving experience. Perfect for drivers wanting to try different racing disciplines and improve their adaptability.",
+      price: "$699",
+      originalPrice: "$899",
+      duration: "Full Day (8 hours)",
+      location: "Calder Park Raceway, Melbourne, Victoria",
+      trackLength: "2.3km",
+      difficulty: "Beginner to Intermediate",
+      maxSpeed: "190km/h",
+      featured: false,
+      includes: [
+        "Professional instruction",
+        "25+ track laps",
+        "Multi-configuration experience",
+        "Video recording",
+        "Technical analysis",
+        "Safety equipment",
+        "Completion certificate",
+        "Full catering"
+      ],
+      highlights: [
+        "Thunderdome oval",
+        "Road course",
+        "Multiple configurations",
+        "Technical sections",
+        "Unique layout options",
+        "Professional support"
+      ],
+      image: "https://images.pexels.com/photos/12801/pexels-photo-12801.jpeg",
+      trackFeatures: [
+        "2.3km road course",
+        "Thunderdome NASCAR oval",
+        "Technical corners",
+        "Multiple layout options",
+        "Modern facilities"
+      ]
     }
   ]
 
@@ -373,23 +637,23 @@ export default function ExperiencesPage() {
           <Tabs value={selectedCategory} onValueChange={setSelectedCategory} className="w-full">
             <TabsList className="grid w-full grid-cols-1 md:grid-cols-3 gap-4 h-auto mb-12 bg-transparent">
               <TabsTrigger 
-                value="victoria" 
+                value="trackdays" 
                 className="py-6 px-8 data-[state=active]:bg-primary data-[state=active]:text-white border border-primary/20 hover:border-primary/50 transition-all duration-300"
               >
                 <div className="text-center">
                   <Icons.bmw width={32} height={32} className="mx-auto mb-2" />
-                  <h3 className="text-lg font-semibold mb-1">Victoria BMW E90</h3>
-                  <p className="text-sm opacity-80">Comfort meets performance</p>
+                  <h3 className="text-lg font-semibold mb-1">Track Days</h3>
+                  <p className="text-sm opacity-80">Experience & Rental Program</p>
                 </div>
               </TabsTrigger>
               <TabsTrigger 
-                value="global" 
+                value="race" 
                 className="py-6 px-8 data-[state=active]:bg-primary data-[state=active]:text-white border border-primary/20 hover:border-primary/50 transition-all duration-300"
               >
                 <div className="text-center">
-                  <Globe className="h-8 w-8 mx-auto mb-2" />
-                  <h3 className="text-lg font-semibold mb-1">Global Testing</h3>
-                  <p className="text-sm opacity-80">Worldwide racing experiences</p>
+                  <Trophy className="h-8 w-8 mx-auto mb-2" />
+                  <h3 className="text-lg font-semibold mb-1">Race Program</h3>
+                  <p className="text-sm opacity-80">Your path to professional racing</p>
                 </div>
               </TabsTrigger>
               <TabsTrigger 
@@ -397,29 +661,29 @@ export default function ExperiencesPage() {
                 className="py-6 px-8 data-[state=active]:bg-primary data-[state=active]:text-white border border-primary/20 hover:border-primary/50 transition-all duration-300"
               >
                 <div className="text-center">
-                  <Trophy className="h-8 w-8 mx-auto mb-2" />
+                  <Target className="h-8 w-8 mx-auto mb-2" />
                   <h3 className="text-lg font-semibold mb-1">Training & Coaching</h3>
                   <p className="text-sm opacity-80">Professional development</p>
                 </div>
               </TabsTrigger>
             </TabsList>
 
-            {/* Victoria BMW E90 Experiences */}
-            <TabsContent value="victoria" className="space-y-8">
+            {/* Track Day Experiences */}
+            <TabsContent value="trackdays" className="space-y-8">
               <motion.div
                 variants={containerVariants}
                 initial="hidden"
                 animate="show"
                 className="space-y-8"
               >
-                {/* Featured BMW E90 Experience */}
+                {/* Featured Track Day Experience */}
                 <motion.div variants={itemVariants}>
-                  <FeaturedExperienceCard experience={victoriaExperiences[0]} />
+                  <FeaturedExperienceCard experience={trackDayExperiences[0]} />
                 </motion.div>
 
-                {/* Other Victoria Experiences */}
+                {/* Other Track Day Experiences */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                  {victoriaExperiences.slice(1).map((experience, index) => (
+                  {trackDayExperiences.slice(1).map((experience, index) => (
                     <motion.div key={experience.id} variants={itemVariants}>
                       <DetailedExperienceCard 
                         experience={experience}
@@ -432,29 +696,89 @@ export default function ExperiencesPage() {
               </motion.div>
             </TabsContent>
 
-            {/* Global Testing Experiences */}
-            <TabsContent value="global" className="space-y-8">
+            {/* Race Program Content */}
+            <TabsContent value="race" className="space-y-8">
               <motion.div
                 variants={containerVariants}
                 initial="hidden"
                 animate="show"
                 className="space-y-8"
               >
-                <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
-                  {globalExperiences.map((experience, index) => (
-                    <motion.div key={experience.id} variants={itemVariants}>
-                      <GlobalExperienceCard 
-                        experience={experience}
-                        isSelected={selectedExperience === experience.id}
-                        onClick={() => setSelectedExperience(selectedExperience === experience.id ? null : experience.id)}
+                <Card className="overflow-hidden border-2 hover:border-primary/50 transition-all duration-500">
+                  <div className="grid md:grid-cols-2 gap-6 p-6">
+                    <div className="space-y-6">
+                      <div>
+                        <h3 className="text-2xl font-bold mb-2">Your Journey to Professional Racing</h3>
+                        <p className="text-muted-foreground">
+                          From F4 to GT3, discover your path in professional motorsport with ATXR Racing&apos;s comprehensive race program.
+                        </p>
+                      </div>
+                      
+                      <div className="space-y-4">
+                        <div className="flex items-start gap-3">
+                          <div className="p-2 bg-primary/10 rounded-lg">
+                            <Flag className="h-5 w-5 text-primary" />
+                          </div>
+                          <div>
+                            <h4 className="font-semibold">Global Racing Opportunities</h4>
+                            <p className="text-sm text-muted-foreground">F4, F3, GT3, and Endurance racing pathways available</p>
+                          </div>
+                        </div>
+                        
+                        <div className="flex items-start gap-3">
+                          <div className="p-2 bg-primary/10 rounded-lg">
+                            <Trophy className="h-5 w-5 text-primary" />
+                          </div>
+                          <div>
+                            <h4 className="font-semibold">ATXR Academy Journey</h4>
+                            <p className="text-sm text-muted-foreground">Structured progression from testing to professional racing</p>
+                          </div>
+                        </div>
+                        
+                        <div className="flex items-start gap-3">
+                          <div className="p-2 bg-primary/10 rounded-lg">
+                            <Settings className="h-5 w-5 text-primary" />
+                          </div>
+                          <div>
+                            <h4 className="font-semibold">Professional Support</h4>
+                            <p className="text-sm text-muted-foreground">Full team backing, data analysis, and career guidance</p>
+                          </div>
+                        </div>
+                      </div>
+
+                      <Button asChild size="lg" className="w-full md:w-auto">
+                        <Link href="/race">
+                          Explore Race Program
+                          <ArrowRight className="ml-2 h-5 w-5" />
+                        </Link>
+                      </Button>
+                    </div>
+
+                    <div className="relative h-[400px] rounded-xl overflow-hidden">
+                      <Image
+                        src="https://images.pexels.com/photos/12118842/pexels-photo-12118842.jpeg"
+                        alt="ATXR Racing Program"
+                        fill
+                        className="object-cover"
                       />
-                    </motion.div>
-                  ))}
-                </div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                      <div className="absolute bottom-4 left-4 right-4">
+                        <div className="grid grid-cols-2 gap-2">
+                          <Badge variant="secondary" className="bg-black/70 text-white">
+                            F4 to GT3 Pathways
+                          </Badge>
+                          <Badge variant="secondary" className="bg-black/70 text-white">
+                            Professional Racing
+                          </Badge>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </Card>
               </motion.div>
             </TabsContent>
 
-            {/* Training & Coaching */}
+            {/* Training Content */}
             <TabsContent value="training" className="space-y-8">
               <motion.div
                 variants={containerVariants}
@@ -508,7 +832,7 @@ export default function ExperiencesPage() {
 }
 
 // Featured Experience Card Component
-function FeaturedExperienceCard({ experience }: { experience: any }) {
+function FeaturedExperienceCard({ experience }: { experience: Experience }) {
   return (
     <motion.div
       variants={{
@@ -599,7 +923,7 @@ function FeaturedExperienceCard({ experience }: { experience: any }) {
 
 // Detailed Experience Card Component
 function DetailedExperienceCard({ experience, isSelected, onClick }: { 
-  experience: any, 
+  experience: Experience, 
   isSelected: boolean, 
   onClick: () => void 
 }) {
@@ -702,85 +1026,8 @@ function DetailedExperienceCard({ experience, isSelected, onClick }: {
   )
 }
 
-// Global Experience Card Component
-function GlobalExperienceCard({ experience, isSelected, onClick }: { 
-  experience: any, 
-  isSelected: boolean, 
-  onClick: () => void 
-}) {
-  return (
-    <motion.div
-      whileHover={{ y: -5 }}
-      transition={{ duration: 0.3 }}
-      onClick={onClick}
-      className="cursor-pointer"
-    >
-      <Card className="overflow-hidden h-full group hover:shadow-2xl transition-all duration-500 border-2 hover:border-primary/50">
-        <div className="relative h-56">
-          <Image
-            src={experience.image}
-            alt={experience.title}
-            fill
-            className="object-cover group-hover:scale-105 transition-transform duration-500"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-          <div className="absolute top-4 left-4">
-            <Badge variant="secondary" className="bg-primary text-white">
-              <Globe className="w-3 h-3 mr-1" />
-              Global
-            </Badge>
-          </div>
-          <div className="absolute bottom-4 left-4 right-4">
-            <div className="flex flex-wrap gap-1">
-              {experience.regions.map((region: string, index: number) => (
-                <Badge key={index} variant="secondary" className="bg-black/70 text-white text-xs">
-                  {region}
-                </Badge>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        <CardHeader>
-          <CardTitle className="text-lg">{experience.title}</CardTitle>
-          <CardDescription>{experience.shortDesc}</CardDescription>
-          <div className="text-xl font-bold text-primary">{experience.price}</div>
-        </CardHeader>
-
-        <CardContent className="space-y-3">
-          <p className="text-sm text-muted-foreground">{experience.description}</p>
-          
-          <div className="space-y-2">
-            <div className="flex items-center gap-2 text-sm">
-              <Clock className="h-4 w-4 text-primary" />
-              <span>{experience.duration}</span>
-            </div>
-            <div className="flex items-center gap-2 text-sm">
-              <Target className="h-4 w-4 text-primary" />
-              <span>{experience.difficulty}</span>
-            </div>
-            <div className="flex items-center gap-2 text-sm">
-              <Zap className="h-4 w-4 text-primary" />
-              <span>Max {experience.maxSpeed}</span>
-            </div>
-          </div>
-        </CardContent>
-
-        <CardFooter>
-          <Button className="w-full" variant="outline" asChild>
-            <Link href="/contact">
-              <Globe className="mr-2 h-4 w-4" />
-              Contact for Details
-            </Link>
-          </Button>
-        </CardFooter>
-      </Card>
-    </motion.div>
-  )
-}
-
 // Training Experience Card Component
-function TrainingExperienceCard({ experience }: { experience: any }) {
+function TrainingExperienceCard({ experience }: { experience: Experience }) {
   return (
     <motion.div
       whileHover={{ scale: 1.02 }}
